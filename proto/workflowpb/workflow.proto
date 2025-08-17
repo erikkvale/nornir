@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package workflow;
+
+// Ensures Go code gets generated into proto/workflowpb
+option go_package = "github.com/erikkvale/nornir/proto/workflowpb;workflowpb";
+
+// Request to start a workflow
+message StartWorkflowRequest {
+    string name = 1;
+}
+
+// Response after starting a workflow
+message StartWorkflowResponse {
+    string id = 1;
+    string status = 2;
+}
+
+// Request to check workflow status
+message GetStatusRequest {
+    string id = 1;
+}
+
+// Response with workflow status
+message GetStatusResponse {
+    string id = 1;
+    string status = 2;
+}
+
+// gRPC service definition
+service WorkflowService {
+    rpc StartWorkflow(StartWorkflowRequest) returns (StartWorkflowResponse);
+    rpc GetStatus(GetStatusRequest) returns (GetStatusResponse);
+}
+
