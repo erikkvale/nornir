@@ -1,0 +1,19 @@
+gateway:
+  image:
+    repository: nornir-gateway
+    tag: latest
+    pullPolicy: Never
+  replicas: 1
+  service:
+    port: 8080
+  env:
+    WORKER_ADDRESS: "worker:50051"
+
+worker:
+  image:
+    repository: nornir-worker
+    tag: latest
+    pullPolicy: Never
+  replicas: 1
+  service:
+    port: 50051

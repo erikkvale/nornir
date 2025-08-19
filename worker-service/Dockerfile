@@ -1,5 +1,3 @@
-# Builder stage
-# ---- Builder ----
 FROM cgr.dev/chainguard/go:latest-dev AS builder
 WORKDIR /app
 
@@ -10,7 +8,6 @@ COPY . .
 
 RUN CGO_ENABLED=0 go build -o worker ./worker-service
 
-# ---- Runtime ----
 FROM cgr.dev/chainguard/static
 COPY --from=builder /app/worker /worker
 

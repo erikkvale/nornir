@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nornir.fullname" . }}-worker
+spec:
+  replicas: {{ .Values.worker.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "nornir.fullname" . }}-worker
+  template:
+    metadata:
+      labels:
+        app: {{ include "nornir.fullname" . }}-worker
+    spec:
+      containers:
+      - name: worker
+        image: "{{ .Values.worker.image.repository }}:{{ .Values.worker.image.tag }}"
+        imagePullPolicy: {{ .Values.gateway.image.pullPolicy | quote }}
+        ports:
+        - containerPort: {{ .Values.worker.service.port }}
