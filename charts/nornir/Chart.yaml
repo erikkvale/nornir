@@ -4,3 +4,7 @@ description: Helm chart for Nornir (gateway + worker services)
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
+dependencies:
+  - name: kafka
+    version: 26.6.1
+    repository: https://charts.bitnami.com/bitnami

@@ -21,6 +21,9 @@ proto:
 proto-clean:
 	rm -f $(PROTO_DIR)/*/*.pb.go $(PROTO_DIR)/*/*_grpc.pb.go
 
+test:
+	go test ./...
+
 build:
 	docker build -f gateway-service/Dockerfile -t $(GATEWAY_IMAGE):$(TAG) .
 	docker build -f worker-service/Dockerfile -t $(WORKER_IMAGE):$(TAG) .
@@ -35,9 +38,8 @@ helm-install-local: build
 		--set worker.image.repository=$(WORKER_IMAGE) \
 		--set worker.image.tag=$(TAG)
 
-docker-tar-clean:
-	rm -f $(GATEWAY_IMAGE).tar $(WORKER_IMAGE).tar
 
 deploy: helm-install-local
 
-.PHONY: proto proto-clean build helm-install helm-install-local deploy docker-tar-clean
+
+.PHONY: proto proto-clean test build helm-install helm-install-local deploy 

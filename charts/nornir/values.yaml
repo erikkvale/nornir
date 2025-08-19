@@ -17,3 +17,15 @@ worker:
   replicas: 1
   service:
     port: 50051
+
+
+kafka:
+  enabled: true
+  replicaCount: 1
+  auth:
+    clientProtocol: plaintext
+    interBrokerProtocol: plaintext
+  listeners:
+    client:
+      protocol: plaintext
+

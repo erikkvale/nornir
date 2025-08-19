@@ -30,7 +30,7 @@ func (s *server) StartWorkflow(ctx context.Context, req *workflowpb.StartWorkflo
 func main() {
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
-		log.Fatalf("failed to listen: %v")
+		log.Fatalf("failed to listen: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
